@@ -21,7 +21,7 @@ class Program
 
     static void Main()
     {
-        var input = File.ReadAllLines("INPUT.TXT");
+        var input = File.ReadAllLines("Lab1/INPUT.txt");
         var firstLine = input[0].Split();
         int n = int.Parse(firstLine[0]);
         long r = long.Parse(firstLine[1]);
@@ -55,7 +55,7 @@ class Program
 
                 if (currentTime + timeNeededOnBattery > item.Di)
                 {
-                    File.WriteAllText("OUTPUT.TXT", "Impossible");
+                    File.WriteAllText("OUTPUT.txt", "Impossible");
                     return;
                 }
 
@@ -64,7 +64,7 @@ class Program
             }
         }
 
-        using (var writer = new StreamWriter("OUTPUT.TXT"))
+        using (var writer = new StreamWriter("OUTPUT.txt"))
         {
             foreach (var (time, id) in plan)
             {
