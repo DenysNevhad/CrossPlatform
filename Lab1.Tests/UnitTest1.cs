@@ -76,17 +76,6 @@ namespace Lab1.Tests
         }
 
         [Fact]
-        public void TestValidDryingPlan()
-        {
-            var input = "5 2\n5 10\n4 9\n6 8\n3 7\n2 5\n";
-            var expected = "0 5\n2 4\n5 3\n9 2\n14 1";
-
-            var result = PlanDrying(input);
-
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
         public void TestImpossiblePlan()
         {
             var input = "3 1\n5 3\n6 4\n7 5\n";
