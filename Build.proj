@@ -1,0 +1,23 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Solution Condition="'$(Solution)' == ''"></Solution>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(Solution)' != ''">
+    <MainProjectFile Include="Labs\$(Solution)\$(Solution).csproj" />
+    <TestProjectFile Include="Labs\$(Solution).Tests\$(Solution).Tests.csproj" />
+  </ItemGroup>
+
+  <Target Name="Build">
+    <MSBuild Projects="@(MainProjectFile);@(TestProjectFile)" Targets="Restore;Build" />
+  </Target>
+
+  <Target Name="Test">
+    <Exec Command="dotnet test @(TestProjectFile) --logger &quot;console;verbosity=detailed&quot;" />
+  </Target>
+
+  <Target Name="Run">
+    <Exec Command="dotnet run --project &quot;@(MainProjectFile)&quot;" />
+  </Target>
+</Project>
