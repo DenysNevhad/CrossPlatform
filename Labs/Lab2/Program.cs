@@ -5,8 +5,9 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        string inputPath = "INPUT.txt";
-        string outputPath = "OUTPUT.txt";
+        string rootDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
+        string inputPath = Path.Combine(rootDirectory, "INPUT.txt");
+        string outputPath = Path.Combine(rootDirectory, "OUTPUT.txt");
 
         string[] lines = File.ReadAllLines(inputPath);
         long[] results = new long[lines.Length];

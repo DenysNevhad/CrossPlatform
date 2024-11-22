@@ -1,11 +1,16 @@
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        string[] input = File.ReadAllText("INPUT.txt").Split();
+        string rootDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
+        string inputPath = Path.Combine(rootDirectory, "INPUT.txt");
+        string outputPath = Path.Combine(rootDirectory, "OUTPUT.txt");
+
+        string[] input = File.ReadAllText(inputPath).Split();
         int B1 = int.Parse(input[0]);
         int B2 = int.Parse(input[1]);
         int B3 = int.Parse(input[2]);
@@ -13,8 +18,9 @@ public class Program
 
         string result = SolveBuckets(B1, B2, B3, T);
 
-        File.WriteAllText("OUTPUT.txt", result);
+        File.WriteAllText(outputPath, result);
     }
+
     public static string SolveBuckets(int B1, int B2, int B3, int T)
     {
         if (T > B1 || T < 0 || GCD(B1, GCD(B2, B3)) != 1 && T % GCD(B1, GCD(B2, B3)) != 0)

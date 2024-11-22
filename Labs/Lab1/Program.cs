@@ -21,7 +21,17 @@ class Program
 
     static void Main()
     {
-        var input = File.ReadAllLines("INPUT.txt");
+        string rootDirectory = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\.."));
+        string inputPath = Path.Combine(rootDirectory, "INPUT.txt");
+        string outputPath = Path.Combine(rootDirectory, "OUTPUT.txt");
+
+        if (!File.Exists(inputPath))
+        {
+            Console.WriteLine($"Файл {inputPath} не знайдено.");
+            return;
+        }
+
+        var input = File.ReadAllLines(inputPath);
         var firstLine = input[0].Split();
         int n = int.Parse(firstLine[0]);
         long r = long.Parse(firstLine[1]);
@@ -55,7 +65,7 @@ class Program
 
                 if (currentTime + timeNeededOnBattery > item.Di)
                 {
-                    File.WriteAllText("OUTPUT.txt", "Impossible");
+                    File.WriteAllText(outputPath, "Impossible");
                     return;
                 }
 
@@ -64,12 +74,14 @@ class Program
             }
         }
 
-        using (var writer = new StreamWriter("OUTPUT.txt"))
+        using (var writer = new StreamWriter(outputPath))
         {
             foreach (var (time, id) in plan)
             {
                 writer.WriteLine($"{time} {id}");
             }
         }
+
+        Console.WriteLine("Обробка завершена. Результат записано у файл OUTPUT.txt.");
     }
 }
